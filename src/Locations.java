@@ -54,18 +54,4 @@ public class Locations {
 	{
 		this.locations.add(location);
 	}
-	
-	public void addExits(List<Exit> exits)
-	{
-		System.out.println(exits);
-		for(Exit exit : exits)
-		{
-			System.out.println(exit);
-			Location location = getLocation(exit.getFrom().getId());
-			if(location != null)
-			{
-				location.addExit(exit);
-			}
-		}
-	}
 }

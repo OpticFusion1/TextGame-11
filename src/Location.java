@@ -1,10 +1,5 @@
 import java.util.*;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 public class Location
@@ -48,14 +43,12 @@ public class Location
 		return name;
 	}
 	
-	@XmlElement
-	//@XmlElementWrapper(name="exits")
+	@XmlElement(name="exit")
 	public void setExit(Exit exit)
 	{
-		System.out.println("Adding exit");
 		exits.add(exit);
 	}
-	
+		
 	public void removeExit(Exit exit)
 	{
 		if(exits.contains(exit))

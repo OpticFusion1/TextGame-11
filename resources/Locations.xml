@@ -17,12 +17,10 @@
 	<location id="hall">
 		<name>Hall</name>
 		<description>You are in the hall.</description>
-		<exits>
-			<exit>
-				<direction>3</direction>
-				<from>hall</from>
-				<to>kitchen</to>
-			</exit>
-		</exits>
+		<exit>
+			<direction>3</direction>
+			<from>hall</from>
+			<to>kitchen</to>
+		</exit>
 	</location>
 </locations>
