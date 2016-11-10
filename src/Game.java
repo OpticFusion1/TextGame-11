@@ -3,11 +3,18 @@ import java.util.*;
 public class Game {
 	
 	private Location currentLocation;
+	private List<Location> locations;
 	String command;
 	
 	public Game()
 	{		
 		currentLocation = null; /* replace this */
+	}
+	
+	public Game(Locations locations)
+	{
+		currentLocation = null;
+		this.locations = locations.getLocations();
 	}
 	
 	public void setLocation(Location newLocation)
@@ -24,6 +31,9 @@ public class Game {
 			System.out.println(exit);
 		}
 	}
+	
+	
+	
 	public void gamePrompt()
 	{
 		boolean continuePrompt = true;
@@ -41,7 +51,7 @@ public class Game {
 			{
 				if(exit.getDirectionName().equals(command))
 				{
-					this.setLocation(exit.getLeadsTo());
+					this.setLocation(exit.getTo());
 					this.showLocation();
 				}
 			}

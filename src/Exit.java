@@ -1,4 +1,9 @@
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlIDREF;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
+@XmlRootElement
 public class Exit {
 	
 	// Numerical codes
@@ -25,7 +30,9 @@ public class Exit {
 		"out"
 	};
 	
-	private Location leadsTo = null;
+	private Location to = null;
+	private Location from = null;
+	
 	private int direction;
 	private String directionName;
 	
@@ -33,19 +40,21 @@ public class Exit {
 	public Exit()
 	{
 		direction = Exit.UNDEFINED;
-		leadsTo = null;
+		to = null;
+		from = null;
 		directionName = dirName[UNDEFINED];
 	}
 	
 	// Full constructor
-	public Exit(int exitDirection, Location exitLeadsTo)
+	public Exit(int exitDirection, Location exitLeadsFrom, Location exitLeadsTo)
 	{
 		direction = exitDirection;
 		if(exitDirection <= dirName.length)
 		{
 			directionName = dirName[direction];
 		}
-		leadsTo = exitLeadsTo;
+		to = exitLeadsTo;
+		from = exitLeadsFrom;
 	}
 	
 	public String toString()
@@ -53,6 +62,15 @@ public class Exit {
 		return directionName;
 	}
 	
+	@XmlElement
+	public void setDirection(int direction)
+	{
+		this.direction = direction;
+		if(direction <= dirName.length)
+		{
+			directionName = dirName[direction];
+		}
+	}
 	public void setDirectionName(String exitDirectionName)
 	{
 		directionName = exitDirectionName;
@@ -63,13 +81,27 @@ public class Exit {
 		return directionName;
 	}
 	
-	public void setLeadsTo(Location exitLeadsTo)
+	@XmlIDREF
+	@XmlElement
+	public void setTo(Location exitTo)
 	{
-		leadsTo = exitLeadsTo;
+		to = exitTo;
 	}
 	
-	public Location getLeadsTo()
+	public Location getTo()
 	{
-		return leadsTo;
+		return to;
+	}
+	
+	@XmlIDREF
+	@XmlElement
+	public void setFrom(Location exitFrom)
+	{
+		from = exitFrom;
+	}
+	
+	public Location getFrom()
+	{
+		return from;
 	}
 }

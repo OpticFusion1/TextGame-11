@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<locations>
+	<location id="kitchen">
+		<name>Kitchen</name>
+		<description>You are in the kitchen.</description>
+		<exit>
+			<direction>1</direction>
+			<from>kitchen</from>
+			<to>hall</to>
+		</exit>
+		<exit>
+			<direction>4</direction>
+			<from>kitchen</from>
+			<to>hall</to>
+		</exit>
+	</location>
+	<location id="hall">
+		<name>Hall</name>
+		<description>You are in the hall.</description>
+		<exits>
+			<exit>
+				<direction>3</direction>
+				<from>hall</from>
+				<to>kitchen</to>
+			</exit>
+		</exits>
+	</location>
+</locations>

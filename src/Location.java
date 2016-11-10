@@ -1,8 +1,16 @@
 import java.util.*;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlID;
+
+@XmlRootElement
 public class Location
 {
-	//private String id;
+	private String id;
+	
 	private String name;
 	private String description;
 	private ArrayList<Exit> exits;
@@ -11,23 +19,25 @@ public class Location
 	public Location()
 	{
 		// Blanks by default
-		//id = new String();
+		id = new String();
 		name = new String();
 		description = new String();
 		exits = new ArrayList<Exit>();
 	}
 	
 	// Partial constructor
-	public Location(String locationName)
+	public Location(String id, String locationName)
 	{
+		this.id = id;
 		name = locationName;
 		description = new String();
 		exits = new ArrayList<Exit>();
 	}
 	
 	// Full constructor
-	public Location(String locationName, String locationDesc)
+	public Location(String id, String locationName, String locationDesc)
 	{
+		this.id = id;
 		name = locationName;
 		description = locationDesc;
 		exits = new ArrayList<Exit>();
@@ -38,8 +48,11 @@ public class Location
 		return name;
 	}
 	
-	public void addExit(Exit exit)
+	@XmlElement
+	//@XmlElementWrapper(name="exits")
+	public void setExit(Exit exit)
 	{
+		System.out.println("Adding exit");
 		exits.add(exit);
 	}
 	
@@ -61,6 +74,7 @@ public class Location
 		return name;
 	}
 	
+	@XmlElement
 	public void setName(String locationName)
 	{
 		name = locationName;
@@ -71,8 +85,21 @@ public class Location
 		return description;
 	}
 	
+	@XmlElement
 	public void setDescription(String locationDesc)
 	{
 		description = locationDesc;
+	}
+	
+	public String getId()
+	{
+		return id;
+	}
+	
+	@XmlID
+	@XmlAttribute
+	public void setId(String newId)
+	{
+		id = newId;
 	}
 }
