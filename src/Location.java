@@ -71,7 +71,7 @@ public class Location
 	{
 		items.add(item);
 	}
-	
+
 	public void removeItem(Item item)
 	{
 		if(items.contains(item))
@@ -79,39 +79,39 @@ public class Location
 			items.remove(item);
 		}
 	}
-	
+
 	public List<Item> getItems()
 	{
 		return (ArrayList<Item>) items.clone();
 	}
-	
+
 	public String getName()
 	{
 		return name;
 	}
-	
+
 	@XmlElement
 	public void setName(String locationName)
 	{
 		name = locationName;
 	}
-	
+
 	public String getDescription()
 	{
 		return description;
 	}
-	
+
 	@XmlElement
 	public void setDescription(String locationDesc)
 	{
 		description = locationDesc;
 	}
-	
+
 	public String getId()
 	{
 		return id;
 	}
-	
+
 	@XmlID
 	@XmlAttribute
 	public void setId(String newId)
