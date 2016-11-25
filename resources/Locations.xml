@@ -1,26 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <locations>
-	<location id="kitchen">
-		<name>Kitchen</name>
-		<description>You are in the kitchen.</description>
+	<location id="apartment">
+		<name>Apartment</name>
+		<description>You wake up in a sunny apartment, head splitting. You see a coat with a yellow badge.</description>
 		<exit>
-			<direction>1</direction>
-			<from>kitchen</from>
-			<to>hall</to>
+			<direction>8</direction>
+			<from>apartment</from>
+			<to>street</to>
+		</exit>
+		<item id="badge">
+			<name>badge</name>
+			<description>It's a badge</description>
+			<type>badgeType</type>
+			<properties>null</properties>
+		</item>
+		<item id="coat">
+			<name>coat</name>
+			<description>It's a coat</description>
+			<type>coatType</type>
+			<properties>null</properties>
+		</item>
+	</location>
+	<location id="street">
+		<name>Street</name>
+		<description>You go out on to the street. You can go east or west.</description>
+		<exit>
+			<direction>2</direction>
+			<from>street</from>
+			<to>side-alley</to>
 		</exit>
 		<exit>
 			<direction>4</direction>
-			<from>kitchen</from>
-			<to>hall</to>
+			<from>street</from>
+			<to>tram-stop</to>
 		</exit>
 	</location>
-	<location id="hall">
-		<name>Hall</name>
-		<description>You are in the hall.</description>
+	<location id="side-alley">
+		<name>Side alley</name>
+		<description>You go up a side alley and learn something new.</description>
 		<exit>
-			<direction>3</direction>
-			<from>hall</from>
-			<to>kitchen</to>
+			<direction>4</direction>
+			<from>side-alley</from>
+			<to>street</to>
+		</exit>
+	</location>
+	<location id="tram-stop">
+		<name>Tram stop</name>
+		<description>You come by a tram stop. Someone recognises your badge and tells you to find the club!</description>
+		<exit>
+			<direction>4</direction>
+			<from>tram-stop</from>
+			<to>industrial-area</to>
+		</exit>
+	</location>
+	<location id="industrial-area">
+		<name>Industrial area</name>
+		<description>You're in a bleak industrial area and fight someone.</description>
+		<exit>
+			<direction>4</direction>
+			<from>industrial-area</from>
+			<to>club-door</to>
+		</exit>
+	</location>
+	<location id="club-door">
+		<name>Club door</name>
+		<description>You find your way to the club and answer the bouncer's challenge.</description>
+		<exit>
+			<direction>7</direction>
+			<from>club-door</from>
+			<to>club</to>
+		</exit>
+	</location>
+	<location id="club">
+		<name>Club</name>
+		<description>You're in the club! You win!</description>
+		<exit>
+			<direction>8</direction>
+			<from>club</from>
+			<to>club-door</to>
 		</exit>
 	</location>
 </locations>

@@ -9,6 +9,7 @@ public class Location
 	private String name;
 	private String description;
 	private ArrayList<Exit> exits;
+	private ArrayList<Item> items;
 	
 	// Blank constructor
 	public Location()
@@ -18,6 +19,7 @@ public class Location
 		name = new String();
 		description = new String();
 		exits = new ArrayList<Exit>();
+		items = new ArrayList<Item>();
 	}
 	
 	// Partial constructor
@@ -27,6 +29,7 @@ public class Location
 		name = locationName;
 		description = new String();
 		exits = new ArrayList<Exit>();
+		items = new ArrayList<Item>();
 	}
 	
 	// Full constructor
@@ -36,6 +39,7 @@ public class Location
 		name = locationName;
 		description = locationDesc;
 		exits = new ArrayList<Exit>();
+		items = new ArrayList<Item>();
 	}
 	
 	public String toString()
@@ -60,6 +64,25 @@ public class Location
 	public List<Exit> getExits()
 	{
 		return (ArrayList<Exit>) exits.clone();
+	}
+	
+	@XmlElement(name="item")
+	public void setItem(Item item)
+	{
+		items.add(item);
+	}
+	
+	public void removeItem(Item item)
+	{
+		if(items.contains(item))
+		{
+			items.remove(item);
+		}
+	}
+	
+	public List<Item> getItems()
+	{
+		return (ArrayList<Item>) items.clone();
 	}
 	
 	public String getName()

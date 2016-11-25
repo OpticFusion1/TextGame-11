@@ -25,11 +25,19 @@ public class Game {
 	public void showLocation()
 	{
 		System.out.println(currentLocation.getDescription());
-		System.out.println("Available exits");
+		System.out.println("========");
+		System.out.print("Available exits: ");
 		for(Exit exit : currentLocation.getExits())
 		{
-			System.out.println(exit);
+			System.out.print(exit + " ");
 		}
+		System.out.println("\n========");
+		System.out.print("Available items: ");
+		for(Item item : currentLocation.getItems())
+		{
+			System.out.print(item + " ");
+		}
+		System.out.println("\n========");
 	}
 	
 	
@@ -53,6 +61,10 @@ public class Game {
 				{
 					this.setLocation(exit.getTo());
 					this.showLocation();
+					if(this.currentLocation.getId().equals("club"))
+					{
+						continuePrompt = false;
+					}
 				}
 			}
 		}

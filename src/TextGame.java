@@ -5,12 +5,7 @@ public class TextGame {
 		try {
 			Locations locations = LoadResources.loadLocations("resources/Locations.xml");
 			
-			/* TODO - http://stackoverflow.com/questions/5319024/using-jaxb-to-cross-reference-xmlids-from-two-xml-files */
-						
 			Game game = new Game(locations);
-			
-			/*locations.get(0).addExit(new Exit(Exit.NORTH, locations.get(1)));
-			locations.get(1).addExit(new Exit(Exit.SOUTH, locations.get(0)));*/
 			
 			game.setLocation(locations.get(0));
 			game.showLocation();

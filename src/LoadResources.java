@@ -1,7 +1,4 @@
-import java.util.*;
 import javax.xml.bind.*;
-import javax.xml.stream.*;
-import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 
 public class LoadResources {
@@ -19,4 +16,5 @@ public class LoadResources {
 		}
 		return locations;
 	}
+	/* Add XML annotations to items so that they can be imported too */
 }

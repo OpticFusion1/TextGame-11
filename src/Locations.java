@@ -37,7 +37,7 @@ public class Locations {
 		return this.locations.get(index);
 	}
 	
-	public Location getLocation(String id)
+	public Location get(String id)
 	{
 		for(Location location : getLocations())
 		{
