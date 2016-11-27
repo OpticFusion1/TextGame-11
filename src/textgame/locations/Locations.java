@@ -1,3 +1,4 @@
+package textgame.locations;
 import java.util.*;
 
 import javax.xml.bind.annotation.XmlElement;

@@ -1,4 +1,10 @@
+package textgame.game;
 import javax.xml.bind.*;
+
+import textgame.locations.Exit;
+import textgame.locations.Location;
+import textgame.locations.Locations;
+
 import java.io.File;
 
 public class LoadResources {

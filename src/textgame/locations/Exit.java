@@ -1,3 +1,4 @@
+package textgame.locations;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement

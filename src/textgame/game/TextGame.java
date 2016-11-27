@@ -1,18 +1,20 @@
-import java.util.*;
+package textgame.game;
 
-public class TextGame {
+import textgame.entities.*;
+import textgame.locations.*;
+
+public final class TextGame {
 	public static void main(String[] args) {
 		try {
 			Locations locations = LoadResources.loadLocations("resources/Locations.xml");
-			
-			Game game = new Game(locations);
-			
+			Player player = new Player("tom");
+
+			Game game = new Game(locations, player);
+
 			game.setLocation(locations.get(0));
 			game.showLocation();
 			game.gamePrompt();
-		}
-		catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
