@@ -13,7 +13,7 @@ public class Game {
 	String command;
 
 	public Game() {
-		currentLocation = null; /* replace this */
+		currentLocation = null; /* TODO: replace this */
 		player = null;
 	}
 
@@ -39,11 +39,10 @@ public class Game {
 		for (Item item : currentLocation.getItems()) {
 			Outputter.write(item + " ");
 		}
-		Outputter.writeln("\n");
+		Outputter.writeln("\n========");
 	}
 
 	public void showInventory() {
-		Outputter.writeln("========");
 		Outputter.write("Current inventory: ");
 		for (Item item : player.getItems()) {
 			Outputter.write(item + " ");
@@ -59,8 +58,7 @@ public class Game {
 		boolean continuePrompt = true;
 		Scanner in = new Scanner(System.in);
 		while (continuePrompt) {
-			/* TODO - prefer not to use System.out directly */
-			Outputter.write("Enter command: ");
+			Outputter.write("Enter command (exit, item, [q]uit, [i]nventory or [l]ocation): ");
 			String command = in.next();
 			if (command.equals("q")) {
 				continuePrompt = false;
@@ -68,7 +66,7 @@ public class Game {
 			if (command.equals("i")) {
 				showInventory();
 			}
-			if (command.equals("s")) {
+			if (command.equals("l")) {
 				showLocation();
 			}
 			for (Exit exit : currentLocation.getExits()) {
@@ -76,6 +74,7 @@ public class Game {
 					this.setLocation(exit.getTo());
 					this.showLocation();
 					if (this.currentLocation.getId().equals("club")) {
+						// End of game. Need a better mechanism
 						continuePrompt = false;
 					}
 				}
