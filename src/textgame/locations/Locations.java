@@ -21,14 +21,14 @@ public class Locations {
 	public String toString()
 	{
 		String info = "";
-		for(Location location : getLocations())
+		for(Location location : getAll())
 		{
 			info += location;
 		}
 		return info;
 	}
 	
-	public List<Location> getLocations()
+	public List<Location> getAll()
 	{
 		return this.locations;
 	}
@@ -40,7 +40,7 @@ public class Locations {
 	
 	public Location get(String id)
 	{
-		for(Location location : getLocations())
+		for(Location location : getAll())
 		{
 			if(location.getId().equals(id))
 			{

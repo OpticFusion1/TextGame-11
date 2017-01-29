@@ -3,6 +3,7 @@ package textgame.locations;
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
+import textgame.game.Outputter;
 import textgame.items.*;
 
 @XmlRootElement
@@ -65,15 +66,28 @@ public class Location {
 	public void setItem(Item item) {
 		items.add(item);
 	}
+	
+	public Item getItem(Item item) {
+		return getItem(item.getName());
+	}
 
-	public void removeItem(Item item) {
-		if (items.contains(item)) {
-			items.remove(item);
+	public Item getItem(String itemName) {
+		for (Item item : items) {
+			if (item.getName().equals(itemName)) {
+				return item;
+			}
 		}
+		return null;
 	}
 
 	public List<Item> getItems() {
 		return (List<Item>) ((ArrayList<Item>) items).clone();
+	}
+	
+	public void removeItem(Item item) {
+		if (items.contains(item)) {
+			items.remove(item);
+		}
 	}
 
 	public String getName() {
@@ -102,5 +116,20 @@ public class Location {
 	@XmlAttribute
 	public void setId(String newId) {
 		id = newId;
+	}
+	
+	public void show() {
+		Outputter.writeln(getDescription());
+		Outputter.writeln("========");
+		Outputter.write("Available exits: ");
+		for (Exit exit : getExits()) {
+			Outputter.write(exit + " ");
+		}
+		Outputter.writeln("\n========");
+		Outputter.write("Available items: ");
+		for (Item item : getItems()) {
+			Outputter.write(item + " ");
+		}
+		Outputter.writeln("\n========");
 	}
 }

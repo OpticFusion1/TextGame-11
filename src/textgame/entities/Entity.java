@@ -2,6 +2,7 @@ package textgame.entities;
 
 import java.util.*;
 import textgame.locations.*;
+import textgame.game.Outputter;
 import textgame.items.*;
 
 // Superclass for all entities (player, NPCs)
@@ -62,5 +63,13 @@ public abstract class Entity {
 		if (itemToRemove != null) {
 			items.remove(itemToRemove);
 		}
+	}
+	
+	public void showItems() {
+		Outputter.write("Current inventory: ");
+		for (Item item : getItems()) {
+			Outputter.write(item + " ");
+		}
+		Outputter.writeln("\n");
 	}
 }

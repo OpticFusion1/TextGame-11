@@ -15,6 +15,13 @@ public class Item {
 		name = null;
 		description = null;
 	}
+	
+	public Item(String name) {
+		id = null;
+		type = null;
+		this.name = name;
+		description = null;
+	}
 
 	public Item(String id, String type, String name, String description) {
 		this.id = id;

@@ -11,9 +11,7 @@ public final class TextGame {
 
 			Game game = new Game(locations, player);
 
-			game.setLocation(locations.get(0));
-			game.showLocation();
-			game.gamePrompt();
+			game.play();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

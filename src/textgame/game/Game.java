@@ -6,88 +6,46 @@ import textgame.items.*;
 import textgame.locations.*;
 
 public class Game {
+	
+	public enum State { PLAYER_ALIVE, WIN, QUIT };
 
-	private Location currentLocation;
 	private List<Location> locations;
 	private Player player;
-	String command;
-
-	public Game() {
-		currentLocation = null; /* TODO: replace this */
-		player = null;
-	}
+	private State gameState;
+	private CommandParser commandParser;
 
 	public Game(Locations locations, Player player) {
-		currentLocation = null;
-		this.locations = locations.getLocations();
+		this.locations = locations.getAll();
 		this.player = player;
+		this.player.setLocation(locations.get(0));
+		setGameState(State.PLAYER_ALIVE);
+		this.commandParser = new CommandParser(this);
 	}
-
-	public void setLocation(Location newLocation) {
-		currentLocation = newLocation;
-	}
-
-	public void showLocation() {
-		Outputter.writeln(currentLocation.getDescription());
-		Outputter.writeln("========");
-		Outputter.write("Available exits: ");
-		for (Exit exit : currentLocation.getExits()) {
-			Outputter.write(exit + " ");
-		}
-		Outputter.writeln("\n========");
-		Outputter.write("Available items: ");
-		for (Item item : currentLocation.getItems()) {
-			Outputter.write(item + " ");
-		}
-		Outputter.writeln("\n========");
-	}
-
-	public void showInventory() {
-		Outputter.write("Current inventory: ");
-		for (Item item : player.getItems()) {
-			Outputter.write(item + " ");
-		}
-		Outputter.writeln("\n");
-	}
-
+	
 	public Player getPlayer() {
 		return player;
 	}
+	
+	public State getGameState() {
+		return gameState;
+	}
 
-	public void gamePrompt() {
-		boolean continuePrompt = true;
+	public void setGameState(State gameState) {
+		this.gameState = gameState;
+	}
+	
+	public void play() {
 		Scanner in = new Scanner(System.in);
-		while (continuePrompt) {
+		while(getGameState().equals(State.PLAYER_ALIVE)) {
 			Outputter.write("Enter command (exit, item, [q]uit, [i]nventory or [l]ocation): ");
 			String command = in.next();
-			if (command.equals("q")) {
-				continuePrompt = false;
-			}
-			if (command.equals("i")) {
-				showInventory();
-			}
-			if (command.equals("l")) {
-				showLocation();
-			}
-			for (Exit exit : currentLocation.getExits()) {
-				if (exit.getDirectionName().equals(command)) {
-					this.setLocation(exit.getTo());
-					this.showLocation();
-					if (this.currentLocation.getId().equals("club")) {
-						// End of game. Need a better mechanism
-						continuePrompt = false;
-					}
-				}
-			}
-			for (Item item : currentLocation.getItems()) {
-				if (item.getName().equals(command)) {
-					player.addItem(item);
-					currentLocation.removeItem(item);
-					Outputter.writeln("You picked up: " + item.getName());
-				}
-			}
+			commandParser.parse(command);
 		}
 		in.close();
 		Outputter.writeln("Exiting game");
+	}
+	
+	public void sendCommand(String command) {
+		commandParser.parse(command);
 	}
 }
