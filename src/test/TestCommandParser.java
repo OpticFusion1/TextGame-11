@@ -1,13 +1,10 @@
 package test;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
+import org.junit.*;
 import junit.framework.TestCase;
-
 import textgame.entities.Player;
 import textgame.game.Game;
-import textgame.game.LoadResources;
+import textgame.loaders.LoadResources;
 import textgame.locations.Locations;
 
 public class TestCommandParser extends TestCase {
@@ -16,10 +13,10 @@ public class TestCommandParser extends TestCase {
 	private Game game = null;
 	private Player player = null;
 	
-	@Override
+	@Before
 	public void setUp() {
 		try {
-			locations = LoadResources.loadLocations("resources/Locations.xml");
+			locations = LoadResources.loadLocations("resources/Locations.xml");			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -42,5 +39,10 @@ public class TestCommandParser extends TestCase {
 		game.sendCommand("badge");
 		assertNotNull(game.getPlayer().getItem("badge"));
 		assertNull(game.getPlayer().getLocation().getItem("badge"));
+	}
+	
+	@After
+	public void tearDowm() {
+		game = null;
 	}
 }

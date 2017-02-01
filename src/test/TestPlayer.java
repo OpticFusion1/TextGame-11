@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 import junit.framework.TestCase;
 import textgame.entities.Player;
 import textgame.game.Game;
-import textgame.game.LoadResources;
 import textgame.items.*;
+import textgame.loaders.LoadResources;
 import textgame.locations.Locations;
 
 public class TestPlayer extends TestCase {
