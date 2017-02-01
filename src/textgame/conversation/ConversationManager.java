@@ -2,14 +2,22 @@ package textgame.conversation;
 
 import java.util.*;
 
+import textgame.game.Game;
 import textgame.game.Outputter;
+import textgame.entities.*;
 
 public class ConversationManager {
 	private Conversation conversation;
+	private Game game;
+	private Player player;
+	private NPC npc;
 	private int currentLineIndex;
 	
-	public ConversationManager(Conversation conversation) {
-		this.conversation = conversation;
+	public ConversationManager(Game game, NPC npc) {
+		this.game = game;
+		this.player = game.getPlayer();
+		this.npc = npc;
+		this.conversation = npc.getConversation();
 		this.currentLineIndex = 0;
 	}
 
@@ -43,9 +51,15 @@ public class ConversationManager {
 		while(getCurrentLineIndex() < getCurrentLineResponses().size()) {
 			showCurrentLine();
 			showCurrentLineResponses();
-			setCurrentLineIndex(getUserSelection("Enter a number: "));
+			int choice = getUserSelection("Enter a number: ");
+			setCurrentLineIndex(choice);
+			Action responseAction = getCurrentLine().getAction();
+			if(responseAction != null) {
+				game.performAction(player, npc, responseAction);
+			}
 		}
-		showCurrentLine(); // Show user final NPC line
+		showCurrentLine();
+		player.getLocation().show();
 	}
 	
 	public int getUserSelection(String prompt) {

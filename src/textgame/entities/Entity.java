@@ -58,11 +58,16 @@ public abstract class Entity {
 		return null;
 	}
 
-	public void removeItem(Item item) {
+	public Item removeItem(Item item) {
 		Item itemToRemove = getItem(item);
 		if (itemToRemove != null) {
 			items.remove(itemToRemove);
 		}
+		return itemToRemove;
+	}
+	
+	public Item removeItem(String itemName) {
+		return removeItem(getItem(itemName));
 	}
 	
 	public void showItems() {

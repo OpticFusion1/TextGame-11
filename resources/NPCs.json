@@ -23,15 +23,15 @@
 				},
 				{
 					"npc_text": "Come on in then!",
-					"action": "enter"
+					"action": ["enter", "club"]
 				},
 				{
 					"npc_text": "Well get out then",
-					"action": "leave"
+					"action": ["enter", "club"]
 				},
 				{
 					"npc_text": "Goodbye",
-					"action": "leave"
+					"action": ["enter", "club"]
 				}
 			]
 		},
@@ -59,15 +59,15 @@
 				},
 				{
 					"npc_text": "Come on in then!",
-					"action": "enter"
+					"action": ["enter", "club"]
 				},
 				{
 					"npc_text": "Well get out then",
-					"action": "leave"
+					"action": ["enter", "club"]
 				},
 				{
 					"npc_text": "Goodbye",
-					"action": "leave"
+					"action": ["enter", "club"]
 				}
 			]
 		}

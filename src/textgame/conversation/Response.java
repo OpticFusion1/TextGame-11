@@ -24,7 +24,7 @@ public class Response {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public String toString() {
 		return nextIndex + ": " + message;
 	}

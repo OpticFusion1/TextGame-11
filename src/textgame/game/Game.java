@@ -2,7 +2,7 @@ package textgame.game;
 
 import java.util.*;
 
-import textgame.conversation.ConversationManager;
+import textgame.conversation.*;
 import textgame.entities.*;
 import textgame.items.*;
 import textgame.locations.*;
@@ -11,7 +11,7 @@ public class Game {
 	
 	public enum State { PLAYER_ALIVE, WIN, QUIT };
 
-	private List<Location> locations;
+	private Locations locations;
 	private Player player;
 	private State gameState;
 	private CommandParser commandParser;
@@ -22,7 +22,7 @@ public class Game {
 	}
 
 	public Game(Locations locations, Player player, NPCs npcs) {
-		this.locations = locations.getAll();
+		this.locations = locations;
 		this.player = player;
 		this.player.setLocation(locations.get(0));
 		setGameState(State.PLAYER_ALIVE);
@@ -51,8 +51,6 @@ public class Game {
 	}
 
 	public void play() {
-		ConversationManager convo = new ConversationManager(getNPCs().get("bouncer").getConversation());
-		convo.converse();
 		while(getGameState().equals(State.PLAYER_ALIVE)) {
 			Outputter.write("Enter command (exit, item, [q]uit, [i]nventory or [l]ocation): ");
 			String command = commandParser.getCommand();
@@ -63,5 +61,21 @@ public class Game {
 	
 	public void sendCommand(String command) {
 		commandParser.parse(command);
+	}
+	
+	public void performAction(Entity subject, Entity object, Action action) {
+		switch(action.getType()) {
+			case ENTER:
+				subject.setLocation(locations.get(action.getValue()));
+				break;
+			case GIVE:
+				object.addItem(subject.removeItem(action.getValue()));
+				break;
+			case TAKE:
+				subject.addItem(object.removeItem(action.getValue()));
+				break;
+			default:
+				break;
+		}
 	}
 }

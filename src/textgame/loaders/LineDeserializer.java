@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import textgame.conversation.Action;
 import textgame.conversation.Line;
 import textgame.conversation.Response;
 
@@ -29,11 +30,20 @@ public class LineDeserializer implements JsonDeserializer<Line> {
 		JsonArray responseArray = responseLines.getAsJsonArray();
 		for(JsonElement responseElement : responseArray) {
 			JsonObject responseData = responseElement.getAsJsonObject();
+			
 			int nextIndex = responseData.get("next_index").getAsInt();
 			String message = responseData.get("player_text").getAsString();
 			Response response = new Response(nextIndex, message);
+			
 			line.addResponse(response);
 		}
+	}
+	
+	JsonElement actionElement = lineData.get("action");
+	if(actionElement != null) {
+		JsonArray actionArray = actionElement.getAsJsonArray();
+		Action action = new Action(actionArray.get(0).getAsString(), actionArray.get(1).getAsString());
+		line.setAction(action);
 	}
 
 	return line;

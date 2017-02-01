@@ -6,6 +6,7 @@ public class Line {
 
 	private String text;
 	private List<Response> responses;
+	private Action action;
 	
 	public Line() {
 		text = null;
@@ -31,6 +32,14 @@ public class Line {
 	
 	public void addResponse(Response response) {
 		this.responses.add(response);
+	}
+	
+	public Action getAction() {
+		return action;
+	}
+
+	public void setAction(Action action) {
+		this.action = action;
 	}
 
 	public String toString() {

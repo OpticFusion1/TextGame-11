@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.*;
 
 import textgame.conversation.*;
 
-public class NPC {
+public class NPC extends Entity {
 	
 	private String id;
 	private String name;

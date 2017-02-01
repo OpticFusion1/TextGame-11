@@ -2,6 +2,8 @@ package textgame.game;
 
 import java.util.Scanner;
 
+import textgame.conversation.ConversationManager;
+import textgame.entities.NPC;
 import textgame.entities.Player;
 import textgame.items.Item;
 import textgame.locations.*;
@@ -34,6 +36,12 @@ public class CommandParser {
 		}
 		if (command.equals("l")) {
 			currentLocation.show();
+			return;
+		}
+		NPC npc = game.getNPCs().get(command);
+		if (npc != null) {
+			ConversationManager convo = new ConversationManager(game, npc);
+			convo.converse();
 			return;
 		}
 		for (Exit exit : currentLocation.getExits()) {

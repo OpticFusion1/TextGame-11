@@ -6,6 +6,7 @@ import textgame.conversation.*;
 public class Conversation {
 
 	private List<Line> lines;
+	// Add NPC field here
 	
 	public Conversation() {
 		lines = new ArrayList<Line>();
