@@ -1,0 +1,75 @@
+{
+	"NPCs": [
+		{
+			"id": "bouncer",
+			"name": "The Bouncer",
+			"conversation": [
+				{
+					"npc_text": "No, you can't get into the club. You need to have the badge!",
+					"responses": [
+						{
+							"next_index": 1,
+							"player_text": "I have the badge!"
+						},
+						{
+							"next_index": 2,
+							"player_text": "I don't have a badge"
+						},
+						{
+							"next_index": 3,
+							"player_text": "I'm leaving"
+						}
+					]
+				},
+				{
+					"npc_text": "Come on in then!",
+					"action": "enter"
+				},
+				{
+					"npc_text": "Well get out then",
+					"action": "leave"
+				},
+				{
+					"npc_text": "Goodbye",
+					"action": "leave"
+				}
+			]
+		},
+		{
+			"id": "policeman",
+			"name": "A policeman",
+			"conversation": [
+				{
+					"player_text": "Who are you, please?",
+					"npc_text": "No you need to have the badge!",
+					"responses": [
+						{
+							"next_index": 1,
+							"player_text": "I am called Sam!"
+						},
+						{
+							"next_index": 2,
+							"player_text": "I don't know"
+						},
+						{
+							"next_index": 3,
+							"player_text": "I'm leaving"
+						}
+					]
+				},
+				{
+					"npc_text": "Come on in then!",
+					"action": "enter"
+				},
+				{
+					"npc_text": "Well get out then",
+					"action": "leave"
+				},
+				{
+					"npc_text": "Goodbye",
+					"action": "leave"
+				}
+			]
+		}
+	]
+}
