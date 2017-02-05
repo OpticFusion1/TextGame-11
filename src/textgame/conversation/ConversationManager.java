@@ -7,15 +7,13 @@ import textgame.game.Outputter;
 import textgame.entities.*;
 
 public class ConversationManager {
-	private Conversation conversation;
-	private Game game;
+	private List<Line> conversation;
 	private Player player;
 	private NPC npc;
 	private int currentLineIndex;
 	
-	public ConversationManager(Game game, NPC npc) {
-		this.game = game;
-		this.player = game.getPlayer();
+	public ConversationManager(Player player, NPC npc) {
+		this.player = player;
 		this.npc = npc;
 		this.conversation = npc.getConversation();
 		this.currentLineIndex = 0;
@@ -30,11 +28,11 @@ public class ConversationManager {
 	}
 	
 	public Line getCurrentLine() {
-		return this.conversation.getLine(currentLineIndex);
+		return this.conversation.get(currentLineIndex);
 	}
 	
 	public void showCurrentLine() {
-		Outputter.writeln(getCurrentLine().toString()+"\n");
+		Outputter.writeln(getCurrentLine().toString());
 	}
 	
 	public List<Response> getCurrentLineResponses() {
@@ -43,11 +41,12 @@ public class ConversationManager {
 	
 	public void showCurrentLineResponses() {
 		for(Response response : getCurrentLineResponses()) {
-			Outputter.writeln(response.toString()+"\n");
+			Outputter.writeln(response.toString());
 		}
 	}
 	
 	public void converse() {
+		Outputter.writeln(npc.getName() + " says to you:");
 		while(getCurrentLineIndex() < getCurrentLineResponses().size()) {
 			showCurrentLine();
 			showCurrentLineResponses();
@@ -55,11 +54,29 @@ public class ConversationManager {
 			setCurrentLineIndex(choice);
 			Action responseAction = getCurrentLine().getAction();
 			if(responseAction != null) {
-				game.performAction(player, npc, responseAction);
+				performAction(responseAction);
 			}
 		}
-		showCurrentLine();
-		player.getLocation().show();
+		Outputter.write("\n");
+	}
+	
+	public void performAction(Action action) {
+		switch(action.getType()) {
+			case GO:
+				player.move(action.getValue());
+				player.getLocation().show();
+				break;
+			case GIVE:
+				npc.addItem(player.removeItem(action.getValue()));
+				Outputter.writeln("You gave " + action.getValue());
+				break;
+			case TAKE:
+				player.addItem(npc.removeItem(action.getValue()));
+				Outputter.writeln("You received " + action.getValue());
+				break;
+			default:
+				break;
+		}
 	}
 	
 	public int getUserSelection(String prompt) {

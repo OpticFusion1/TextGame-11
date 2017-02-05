@@ -5,33 +5,32 @@ import java.util.Map;
 
 public class Action {
 	
-	public enum ActionType { NONE, ENTER, GIVE, TAKE }
+	public enum ActionType { NONE, GO, GIVE, TAKE }
 	private String value;
-	private ActionType type;
-    private static Map<String, ActionType> ACTION_MAP = new HashMap<>();
+	private String type;
+    private static Map<String, ActionType> ACTION_MAP = new HashMap<String, ActionType>();
 
     static {
         ACTION_MAP.put("none", ActionType.NONE);
-        ACTION_MAP.put("enter", ActionType.ENTER);
+        ACTION_MAP.put("go", ActionType.GO);
         ACTION_MAP.put("give", ActionType.GIVE);
         ACTION_MAP.put("take", ActionType.TAKE);
     }
+    
+    public Action() {
+    }
 	
 	public Action(String type, String value) {
-		this.type = ACTION_MAP.get(type);
-		this.setValue(value);
+		this.type = type;
+		this.value = value;
 	}
 
 	public ActionType getType() {
-		return type;
+		return ACTION_MAP.get(type);
 	}
 
-	public void setType(ActionType type) {
-		this.type = type;
-	}
-	
 	public void setType(String type) {
-		this.type = ACTION_MAP.get(type);
+		this.type = type;
 	}
 
 	public String getValue() {
@@ -40,5 +39,10 @@ public class Action {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+	
+	@Override
+	public String toString() {
+		return "type: " + type + ", value: " + value;
 	}
 }

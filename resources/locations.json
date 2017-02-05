@@ -1,0 +1,137 @@
+{
+	"apartment": {
+		"id": "apartment",
+		"name": "Apartment",
+		"description": "You wake up in a sunny apartment, head splitting.",
+		"exits": [
+			{
+				"direction": "out",
+				"to": "street"
+			}
+		],
+		"items": [
+			{
+				"id": "badger",
+				"name": "Badger",
+				"description": "It's just a blue badger"
+			}
+		],
+		"npcs": [
+			{
+				"id": "bouncer",
+				"name": "The Bouncer",
+				"conversation": [
+					{
+						"text": "No, you can't get into the club. You need to have the badge!",
+						"responses": [
+							{
+								"nextIndex": 1,
+								"message": "I have the badge!"
+							},
+							{
+								"nextIndex": 2,
+								"message": "I don't have a badge"
+							},
+							{
+								"nextIndex": 3,
+								"message": "I'm leaving"
+							}
+						]
+					},
+					{
+						"text": "Come on in then!",
+						"action": {
+							"type": "go",
+							"value": "in"
+						}
+					},
+					{
+						"text": "Well get out then",
+						"action": {
+							"type": "go",
+							"value": "out"
+						}
+					},
+					{
+						"text": "Goodbye",
+						"action": {
+							"type": "go",
+							"value": "out"
+						}
+					}
+				],
+				"items": [
+					{
+						"id": "chocolate",
+						"name": "Chocolate",
+						"description": "It's just a bar of chocolate"
+					}
+				]
+			}
+		]
+	},
+	"street": {
+		"id": "street",
+		"name": "Street",
+		"description": "You're out on the street",
+		"exits": [
+			{
+				"direction": "in",
+				"to": "apartment"
+			}
+		],
+		"npcs": [
+			{
+				"id": "policeman",
+				"name": "A policeman",
+				"conversation": [
+					{
+						"text": "Who are you, please?",
+						"responses": [
+							{
+								"nextIndex": 1,
+								"message": "I am called Sam!"
+							},
+							{
+								"nextIndex": 2,
+								"message": "I don't know"
+							},
+							{
+								"nextIndex": 3,
+								"message": "I'm leaving"
+							}
+						]
+					},
+					{
+						"text": "Come on in then!",
+						"action": {
+							"type": "go",
+							"value": "club"
+						}
+					},
+					{
+						"text": "Well get out then",
+						"action": {
+							"type": "go",
+							"value": "club"
+						}
+					},
+					{
+						"text": "Goodbye",
+						"action": {
+							"type": "go",
+							"value": "club"
+						}
+					}
+				],
+				"items": [
+					{
+						"id": "cheese",
+						"name": "Cheese",
+						"description": "It's just a bit of cheese"
+					}
+				]
+			}
+		]
+	}
+}

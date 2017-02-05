@@ -5,27 +5,23 @@ import textgame.game.Outputter;
 
 public class Item {
 	private String id;
-	private String type;
 	private String name;
 	private String description;
 
 	public Item() {
 		id = null;
-		type = null;
 		name = null;
 		description = null;
 	}
 	
 	public Item(String name) {
 		id = null;
-		type = null;
 		this.name = name;
 		description = null;
 	}
 
-	public Item(String id, String type, String name, String description) {
+	public Item(String id, String name, String description) {
 		this.id = id;
-		this.type = type;
 		this.name = name;
 		this.description = description;
 	}
@@ -38,15 +34,6 @@ public class Item {
 	@XmlAttribute
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	@XmlElement
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getName() {
@@ -82,7 +69,8 @@ public class Item {
 		Outputter.writeln(name + ": " + description);
 	}
 
+	@Override
 	public String toString() {
-		return name;
+		return id;
 	}
 }

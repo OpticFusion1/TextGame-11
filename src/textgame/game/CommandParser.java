@@ -38,21 +38,20 @@ public class CommandParser {
 			currentLocation.show();
 			return;
 		}
-		NPC npc = game.getNPCs().get(command);
-		if (npc != null) {
-			ConversationManager convo = new ConversationManager(game, npc);
-			convo.converse();
+		if(currentLocation.getExit(command) != null) {
+			try {
+				player.move(command);
+			} catch (IllegalArgumentException e) {
+				// TODO use proper commands e.g. 'go out' and catch invalid exits
+			}
 			return;
 		}
-		for (Exit exit : currentLocation.getExits()) {
-			if (exit.getDirectionName().equals(command)) {
-				player.setLocation(exit.getTo());
-				player.getLocation().show();
-				return;
-			}
+		if(currentLocation.getNPC(command) != null) {
+			player.converse(currentLocation.getNPC(command));
+			return;
 		}
 		for (Item item : currentLocation.getItems()) {
-			if (item.getName().equals(command)) {
+			if (item.getId().equals(command)) {
 				player.addItem(item);
 				currentLocation.removeItem(item);
 				Outputter.writeln("You picked up: " + item.getName());

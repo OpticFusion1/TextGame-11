@@ -11,11 +11,31 @@ public class Line {
 	public Line() {
 		text = null;
 		responses = new ArrayList<Response>();
+		action = null;
 	}
 	
 	public Line(String text) {
 		this.text = text;
 		this.responses = new ArrayList<Response>();
+		this.action = null;
+	}
+	
+	public Line(String text, List<Response> responses) {
+		this.text = text;
+		this.responses = responses;
+		this.action = null;
+	}
+	
+	public Line(String text, Action action) {
+		this.text = text;
+		this.responses = new ArrayList<Response>();
+		this.action = action;
+	}
+	
+	public Line(String text, List<Response> responses, Action action) {
+		this.text = text;
+		this.responses = responses;
+		this.action = action;
 	}
 	
 	public String getText() {
@@ -23,6 +43,7 @@ public class Line {
 	}
 	
 	public void setText(String text) {
+		System.out.println("setting text");
 		this.text = text;
 	}
 
@@ -39,9 +60,11 @@ public class Line {
 	}
 
 	public void setAction(Action action) {
+		System.out.println("Setting action");
 		this.action = action;
 	}
 
+	@Override
 	public String toString() {
 		return "-- " + text;
 	}
