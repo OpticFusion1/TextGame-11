@@ -47,6 +47,7 @@ public class ConversationManager {
 	}
 	
 	public void converse() {
+		/* TODO - this function needs tidied up and repetition removed */
 		Outputter.writeln(npc.getName() + " says to you:");
 		while(getCurrentLineIndex() < getCurrentLineResponses().size()) {
 			showCurrentLine();
@@ -58,6 +59,7 @@ public class ConversationManager {
 				player.perform(responseAction);
 			}
 		}
+		showCurrentLine();
 		Outputter.write("\n");
 	}
 	
