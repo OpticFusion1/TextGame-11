@@ -2,6 +2,7 @@ package textgame.game;
 
 import java.util.*;
 
+import textgame.actions.Action;
 import textgame.conversation.*;
 import textgame.entities.*;
 import textgame.locations.*;
@@ -35,12 +36,23 @@ public class Game {
 		this.gameState = gameState;
 	}
 
+	public Map<String, Location> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(Map<String, Location> locations) {
+		this.locations = locations;
+	}
+
 	public void play() {
 		player.getLocation().show();
 		while(getGameState().equals(State.PLAYER_ALIVE)) {
 			Outputter.write("> ");
 			String command = commandParser.getCommand();
-			commandParser.parse(command);
+			Action action = commandParser.parse(command);
+			if(action != null) {
+				player.perform(action);
+			}
 		}
 		Outputter.writeln("Exiting game");
 	}

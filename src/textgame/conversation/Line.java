@@ -2,7 +2,7 @@ package textgame.conversation;
 
 import java.util.*;
 
-import textgame.game.Action;
+import textgame.actions.Action;
 
 public class Line {
 

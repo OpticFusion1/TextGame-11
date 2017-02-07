@@ -2,9 +2,9 @@ package textgame.conversation;
 
 import java.util.*;
 
-import textgame.game.Action;
 import textgame.game.Game;
 import textgame.game.Outputter;
+import textgame.actions.Action;
 import textgame.entities.*;
 
 public class ConversationManager {
@@ -55,29 +55,10 @@ public class ConversationManager {
 			setCurrentLineIndex(choice);
 			Action responseAction = getCurrentLine().getAction();
 			if(responseAction != null) {
-				performAction(responseAction);
+				player.perform(responseAction);
 			}
 		}
 		Outputter.write("\n");
-	}
-	
-	public void performAction(Action action) {
-		switch(action.getType()) {
-			case GO:
-				player.move(action.getValue());
-				player.getLocation().show();
-				break;
-			case GIVE:
-				npc.addItem(player.removeItem(action.getValue()));
-				Outputter.writeln("You gave " + action.getValue());
-				break;
-			case TAKE:
-				player.addItem(npc.removeItem(action.getValue()));
-				Outputter.writeln("You received " + action.getValue());
-				break;
-			default:
-				break;
-		}
 	}
 	
 	public int getUserSelection(String prompt) {

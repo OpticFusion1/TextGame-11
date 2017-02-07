@@ -162,14 +162,14 @@ public class Location {
 			Outputter.write(exit + " ");
 		}
 		Outputter.write("\n");
-		if(getItems().size() > 0) {
+		if(getItems() != null && getItems().size() > 0) {
 			Outputter.write("Available items: ");
 			for (Item item : getItems()) {
 				Outputter.write(item + " ");
 			}
 			Outputter.write("\n");
 		}
-		if(getNPCs().size() > 0) {
+		if(getNPCs() != null && getNPCs().size() > 0) {
 			Outputter.write("Available NPCs: ");
 			for (NPC npc : getNPCs()) {
 				Outputter.write(npc + " ");
