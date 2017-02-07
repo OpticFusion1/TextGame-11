@@ -66,12 +66,12 @@ public abstract class Entity {
 	}
 
 	public Item getItem(Item item) {
-		return getItem(item.getName());
+		return getItem(item.getId());
 	}
 
-	public Item getItem(String itemName) {
+	public Item getItem(String id) {
 		for (Item item : items) {
-			if (item.getName().equals(itemName)) {
+			if (item.getId().equals(id)) {
 				return item;
 			}
 		}
@@ -86,8 +86,8 @@ public abstract class Entity {
 		return itemToRemove;
 	}
 	
-	public Item removeItem(String itemName) {
-		return removeItem(getItem(itemName));
+	public Item removeItem(String id) {
+		return removeItem(getItem(id));
 	}
 	
 	public void showItems() {
@@ -96,5 +96,10 @@ public abstract class Entity {
 			Outputter.write(item + " ");
 		}
 		Outputter.writeln("\n");
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 }

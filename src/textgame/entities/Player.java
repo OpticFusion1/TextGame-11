@@ -3,6 +3,7 @@ package textgame.entities;
 import java.util.Map;
 
 import textgame.actions.Action;
+import textgame.conditions.Condition;
 import textgame.conversation.ConversationManager;
 import textgame.game.Outputter;
 import textgame.items.Item;
@@ -33,6 +34,16 @@ public class Player extends Entity {
 		Exit exit = currentLocation.getExit(direction);
 		if(exit == null) { throw new IllegalArgumentException(direction); }
 		this.setLocation(locations.get(exit.getTo()));
+	}
+	
+	public Boolean meetsCondition(Condition cond) {
+		System.out.println(getItem("badger"));
+		switch(cond.getType()) {
+		case HAS:
+			return getItem(cond.getValue()) != null;
+		default:
+			return false;
+		}
 	}
 	
 	public void perform(Action action) {

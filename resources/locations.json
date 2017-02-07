@@ -27,11 +27,18 @@
 				"name": "The Bouncer",
 				"conversation": [
 					{
-						"text": "No, you can't get into the club. You need to have the badge!",
+						"text": "No, you can't get into the club. You need to have the badger!",
 						"responses": [
 							{
 								"nextIndex": 1,
-								"message": "I have the badge!"
+								"message": "I have the badger!",
+								"conditions": [
+									{
+										"type": "has",
+										"value": "badger",
+										"error": "You need to have the badger"
+									}
+								]
 							},
 							{
 								"nextIndex": 2,
@@ -47,7 +54,7 @@
 						"text": "Come on in then!",
 						"action": {
 							"type": "go",
-							"value": "in"
+							"value": "out"
 						}
 					},
 					{
