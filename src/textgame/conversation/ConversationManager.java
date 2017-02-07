@@ -2,6 +2,7 @@ package textgame.conversation;
 
 import java.util.*;
 
+import textgame.game.Action;
 import textgame.game.Game;
 import textgame.game.Outputter;
 import textgame.entities.*;

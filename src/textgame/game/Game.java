@@ -38,7 +38,7 @@ public class Game {
 	public void play() {
 		player.getLocation().show();
 		while(getGameState().equals(State.PLAYER_ALIVE)) {
-			Outputter.writeln("Enter command (exit, item, [q]uit, [i]nventory or [l]ocation): ");
+			Outputter.write("> ");
 			String command = commandParser.getCommand();
 			commandParser.parse(command);
 		}

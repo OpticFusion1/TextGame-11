@@ -2,6 +2,8 @@ package textgame.conversation;
 
 import java.util.*;
 
+import textgame.game.Action;
+
 public class Line {
 
 	private String text;

@@ -2,7 +2,6 @@ package textgame.game;
 
 import java.util.Scanner;
 
-import textgame.conversation.ConversationManager;
 import textgame.entities.NPC;
 import textgame.entities.Player;
 import textgame.items.Item;
@@ -20,43 +19,81 @@ public class CommandParser {
 	}
 
 	public String getCommand() {
-		String command = in.next();
+		String command = in.nextLine();
 		return command;
 	}
 
+	/* Expects command to be in 'verb noun' format or 'q' to quit
+	 * Only first and last words are significant so e.g. 'talk to the person'
+	 * is interpreted as 'talk person'
+	 */
 	public void parse(String command) {
 		Location currentLocation = player.getLocation();
+		Action action = null;
+		Item item = null;
+		
 		if (command.equals("q")) {
 			game.setGameState(Game.State.QUIT);
 			return;
 		}
-		if (command.equals("i")) {
-			player.showItems();
+		
+		String[] words = command.split(" ");
+		try {
+			action = new Action(words[0], words[words.length - 1]);
+		} catch (IllegalArgumentException e) {
+			Outputter.writeln("Invalid command");
 			return;
 		}
-		if (command.equals("l")) {
-			currentLocation.show();
-			return;
-		}
-		if(currentLocation.getExit(command) != null) {
-			try {
-				player.move(command);
-			} catch (IllegalArgumentException e) {
-				// TODO use proper commands e.g. 'go out' and catch invalid exits
+		
+		switch(action.getType()) {
+		case SHOW:
+			switch(action.getValue()) {
+			case "items":
+			case "inventory":
+				player.showItems();
+				break;
+			case "location":
+				currentLocation.show();
+				break;
+			case "commands":
+			case "actions":
+				Outputter.writeln("Valid commands are 'show', 'go', 'talk', 'inspect', 'give', 'take', 'pick'");
 			}
-			return;
-		}
-		if(currentLocation.getNPC(command) != null) {
-			player.converse(currentLocation.getNPC(command));
-			return;
-		}
-		for (Item item : currentLocation.getItems()) {
-			if (item.getId().equals(command)) {
-				player.addItem(item);
-				currentLocation.removeItem(item);
-				Outputter.writeln("You picked up: " + item.getName());
+			break;
+		case GO:
+			try {
+				player.move(action.getValue());
+				player.getLocation().show();
+			} catch (IllegalArgumentException e) {
+				Outputter.writeln("Exit not found");
+			}
+			break;
+		case TALK:
+			NPC person = currentLocation.getNPC(action.getValue());
+			if(person == null) {
+				Outputter.writeln("Person not found");
 				return;
 			}
+			player.converse(person);
+			break;
+		case PICK:
+		case TAKE:
+			item = currentLocation.getItemById(action.getValue());
+			if(item == null) {
+				Outputter.writeln("Item not found");
+				return;
+			}
+			player.addItem(item);
+			currentLocation.removeItem(item);
+			Outputter.writeln("You picked up: "+item.getName());
+			break;
+		case INSPECT:
+			item = currentLocation.getItemById(action.getValue());
+			Outputter.writeln(item.getDescription());
+			break;
+		case NONE:
+		case GIVE:
+			break;
 		}
 	}
 }
