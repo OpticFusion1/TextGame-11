@@ -37,7 +37,6 @@ public class Player extends Entity {
 	}
 	
 	public Boolean meetsCondition(Condition cond) {
-		System.out.println(getItem("badger"));
 		switch(cond.getType()) {
 		case HAS:
 			return getItem(cond.getValue()) != null;
