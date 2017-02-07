@@ -14,6 +14,11 @@
 				"id": "badger",
 				"name": "Badger",
 				"description": "It's just a blue badger"
+			},
+			{
+				"id": "cheese",
+				"name": "Cheese",
+				"description": "Smelly blue cheese"	
 			}
 		],
 		"npcs": [
@@ -48,8 +53,8 @@
 					{
 						"text": "Well get out then",
 						"action": {
-							"type": "go",
-							"value": "out"
+							"type": "take",
+							"value": "cheese"
 						}
 					},
 					{
