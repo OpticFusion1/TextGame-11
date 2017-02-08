@@ -1,7 +1,5 @@
 package textgame.entities;
 
-import java.util.Map;
-
 import textgame.actions.Action;
 import textgame.conversation.ConversationManager;
 import textgame.game.Outputter;
@@ -11,16 +9,12 @@ import textgame.locations.Location;
 
 public class Player extends Entity {
 	
-	private Map<String, Location> locations;
-	
 	public Player() {
 		super();
-		this.locations = null;
 	}
 	
-	public Player(String name, Map<String, Location> locations) {
+	public Player(String name) {
 		super("player", name);
-		this.locations = locations;
 	}
 	
 	public void converse(NPC person) {
@@ -32,7 +26,7 @@ public class Player extends Entity {
 		Location currentLocation = this.getLocation();
 		Exit exit = currentLocation.getExit(direction);
 		if(exit == null) { throw new IllegalArgumentException(direction); }
-		this.setLocation(locations.get(exit.getTo()));
+		this.setLocation(exit.getTo());
 	}
 	
 	public void perform(Action action) {
@@ -52,7 +46,7 @@ public class Player extends Entity {
 				break;
 			case "commands":
 			case "actions":
-				Outputter.writeln("Valid commands are 'show', 'go', 'talk', 'inspect', 'give', 'take', 'pick'");
+				Outputter.showValidCommands();
 			default:
 				Outputter.writeln("Did not understand: " + action.getValue());
 			}

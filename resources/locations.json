@@ -6,7 +6,11 @@
 		"exits": [
 			{
 				"direction": "out",
-				"to": "street"
+				"toId": "street"
+			},
+			{
+				"direction": "up",
+				"toId": "end"
 			}
 		],
 		"items": [
@@ -82,7 +86,7 @@
 		"exits": [
 			{
 				"direction": "in",
-				"to": "apartment"
+				"toId": "apartment"
 			}
 		],
 		"npcs": [
@@ -138,5 +142,10 @@
 				]
 			}
 		]
+	},
+	"end": {
+		"id": "end",
+		"name": "The end",
+		"description": "Game over! You win!"
 	}
 }

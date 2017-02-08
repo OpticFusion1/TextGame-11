@@ -157,9 +157,11 @@ public class Location {
 	
 	public void show() {
 		Outputter.writeln(getDescription());
-		Outputter.write("Available exits: ");
-		for (Exit exit : getExits()) {
-			Outputter.write(exit + " ");
+		if(getExits() != null) {
+			Outputter.write("Available exits: ");
+			for (Exit exit : getExits()) {
+				Outputter.write(exit + " ");
+			}
 		}
 		Outputter.write("\n");
 		if(getItems() != null && getItems().size() > 0) {
