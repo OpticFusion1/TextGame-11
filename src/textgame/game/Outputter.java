@@ -8,4 +8,8 @@ public final class Outputter {
 	public static void write(String output) {
 		System.out.print(output);
 	}
+	
+	public static void showValidCommands() {
+		System.out.println("Valid commands are 'show', 'go', 'talk', 'inspect', 'give', 'take', 'pick'");
+	}
 }
