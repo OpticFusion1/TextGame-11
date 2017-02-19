@@ -62,7 +62,6 @@ public class Line {
 	}
 
 	public void setAction(Action action) {
-		System.out.println("Setting action");
 		this.action = action;
 	}
 
