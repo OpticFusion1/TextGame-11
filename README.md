@@ -7,3 +7,5 @@ I wrote a text adventure game to improve my Java.
 * Come up with a better story
 
 * Improve handling of Actions
+
+* Better test coverage
