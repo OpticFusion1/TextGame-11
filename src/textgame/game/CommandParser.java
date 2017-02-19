@@ -2,7 +2,7 @@ package textgame.game;
 
 import java.util.Scanner;
 
-import textgame.conversation.ConversationManager;
+import textgame.actions.Action;
 import textgame.entities.NPC;
 import textgame.entities.Player;
 import textgame.items.Item;
@@ -20,43 +20,28 @@ public class CommandParser {
 	}
 
 	public String getCommand() {
-		String command = in.next();
+		String command = in.nextLine();
 		return command;
 	}
 
-	public void parse(String command) {
-		Location currentLocation = player.getLocation();
+	/* Expects command to be in 'verb noun' format or 'q' to quit
+	 * Only first and last words are significant so e.g. 'talk to the person'
+	 * is interpreted as 'talk person'
+	 */
+	public Action parse(String command) {
+		Action action = null;
+		
 		if (command.equals("q")) {
 			game.setGameState(Game.State.QUIT);
-			return;
+			return action;
 		}
-		if (command.equals("i")) {
-			player.showItems();
-			return;
+		
+		String[] words = command.split(" ");
+		try {
+			action = new Action(words[0], words[words.length - 1]);
+		} catch (IllegalArgumentException e) {
+			Outputter.writeln("Invalid command");
 		}
-		if (command.equals("l")) {
-			currentLocation.show();
-			return;
-		}
-		if(currentLocation.getExit(command) != null) {
-			try {
-				player.move(command);
-			} catch (IllegalArgumentException e) {
-				// TODO use proper commands e.g. 'go out' and catch invalid exits
-			}
-			return;
-		}
-		if(currentLocation.getNPC(command) != null) {
-			player.converse(currentLocation.getNPC(command));
-			return;
-		}
-		for (Item item : currentLocation.getItems()) {
-			if (item.getId().equals(command)) {
-				player.addItem(item);
-				currentLocation.removeItem(item);
-				Outputter.writeln("You picked up: " + item.getName());
-				return;
-			}
-		}
+		return action;
 	}
 }

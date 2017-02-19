@@ -2,6 +2,8 @@ package textgame.conversation;
 
 import java.util.*;
 
+import textgame.actions.Action;
+
 public class Line {
 
 	private String text;
@@ -43,7 +45,6 @@ public class Line {
 	}
 	
 	public void setText(String text) {
-		System.out.println("setting text");
 		this.text = text;
 	}
 
@@ -60,7 +61,6 @@ public class Line {
 	}
 
 	public void setAction(Action action) {
-		System.out.println("Setting action");
 		this.action = action;
 	}
 

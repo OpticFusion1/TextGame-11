@@ -15,17 +15,6 @@ public class Location {
 	private List<Item> items;
 	private List<NPC> npcs;
 
-	// Blank constructor
-	public Location() {
-		// Blanks by default
-		id = new String();
-		name = new String();
-		description = new String();
-		exits = new ArrayList<Exit>();
-		items = new ArrayList<Item>();
-		npcs = new ArrayList<NPC>();
-	}
-
 	public Location(String id, String name) {
 		this.id = id;
 		this.name = name;
@@ -130,6 +119,15 @@ public class Location {
 		return null;
 	}
 	
+	public Item getItemById(String id) {
+		for (Item item : this.items) {
+			if (item.getId().equals(id)) {
+				return item;
+			}
+		}
+		return null;
+	}
+	
 	public void removeItem(Item item) {
 		if (items.contains(item)) {
 			items.remove(item);
@@ -159,20 +157,26 @@ public class Location {
 	
 	public void show() {
 		Outputter.writeln(getDescription());
-		Outputter.write("Available exits: ");
-		for (Exit exit : getExits()) {
-			Outputter.write(exit + " ");
+		if(getExits() != null) {
+			Outputter.write("Available exits: ");
+			for (Exit exit : getExits()) {
+				Outputter.write(exit + " ");
+			}
 		}
 		Outputter.write("\n");
-		Outputter.write("Available items: ");
-		for (Item item : getItems()) {
-			Outputter.write(item + " ");
+		if(getItems() != null && getItems().size() > 0) {
+			Outputter.write("Available items: ");
+			for (Item item : getItems()) {
+				Outputter.write(item + " ");
+			}
+			Outputter.write("\n");
 		}
-		Outputter.write("\n");
-		Outputter.write("Available NPCs: ");
-		for (NPC npc : getNPCs()) {
-			Outputter.write(npc + " ");
+		if(getNPCs() != null && getNPCs().size() > 0) {
+			Outputter.write("Available NPCs: ");
+			for (NPC npc : getNPCs()) {
+				Outputter.write(npc + " ");
+			}
+			Outputter.write("\n");
 		}
-		Outputter.write("\n");
 	}
 }

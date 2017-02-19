@@ -23,69 +23,92 @@
 			{
 				"id": "records",
 				"name": "Records",
-				"description": "There are hundreds of records. None of the artists are familiar to you."
+				"description": "There are hundreds of records. You recognise a few techno classics."
 			}
 		]
 	},
 	"street": {
 		"id": "street",
 		"name": "Street",
-		"description": "You're out on the street",
+		"description": "You're out on the street. There's no-one about apart from a man eyeing you suspiciously.",
 		"exits": [
 			{
 				"direction": "in",
 				"toId": "apartment"
+			},
+			{
+				"direction": "club",
+				"toId": "club_entrance"
 			}
 		],
 		"npcs": [
 			{
-				"id": "policeman",
-				"name": "A policeman",
+				"id": "man",
+				"name": "The suspicious man",
 				"conversation": [
 					{
-						"text": "Who are you, please?",
+						"text": "Hey mate, you looking for anything special tonight?",
 						"responses": [
 							{
 								"nextIndex": 1,
-								"message": "I am called Sam!"
+								"message": "What are you talking about?"
 							},
 							{
 								"nextIndex": 2,
-								"message": "I don't know"
-							},
-							{
-								"nextIndex": 3,
-								"message": "I'm leaving"
+								"message": "No, get away!"
 							}
 						]
 					},
 					{
-						"text": "Come on in then!",
-						"action": {
-							"type": "go",
-							"value": "club"
-						}
+						"text": "There's a good party on at the Foundation. Interested in a ticket?",
+						"responses": [
+							{
+								"message": "Yeah, I'd love one!",
+								"nextIndex": "3"
+							},
+							{
+								"message": "No, I'm not interested",
+								"nextIndex": "2"
+							}
+						]
 					},
 					{
-						"text": "Well get out then",
-						"action": {
-							"type": "go",
-							"value": "out"
-						}
+						"text": "Fine then, suit yourself."
 					},
 					{
-						"text": "Goodbye",
+						"text": "These are hard to come by so it's gonna cost you. I'll need something valuable. What have you got?",
+						"responses": [
+							{
+								"message": "Nothing special, to be honest",
+								"nextIndex": "2"
+							},
+							{
+								"message": "What about these records?",
+								"nextIndex": "4",
+								"conditions": [
+									{
+										"type": "has",
+										"value": "records",
+										"error": "You don't have the records."
+									}
+								]
+							}
+						]
+					},
+					{
+						"text": "Wow! Boney M! You've got yourself a deal.",
 						"action": {
-							"type": "go",
-							"value": "club"
+							"type": "receive",
+							"value": "ticket",
+							"from": "man"
 						}
 					}
 				],
 				"items": [
 					{
-						"id": "cheese",
-						"name": "Cheese",
-						"description": "It's just a bit of cheese"
+						"id": "ticket",
+						"name": "Ticket",
+						"description": "It's a paper ticket to a party at the Foundation tonight."
 					}
 				]
 			}
@@ -119,7 +142,14 @@
 							},
 							{
 								"nextIndex": 2,
-								"message": "Here's my ticket."
+								"message": "Here's my ticket.",
+								"conditions": [
+									{
+										"type": "has",
+										"value": "ticket",
+										"error": "You don't have the ticket."
+									}
+								]
 							},
 							{
 								"nextIndex": 3,
@@ -131,7 +161,7 @@
 						"text": "Private party. Can't help."
 					},
 					{
-						"text": "Come straight through, please",
+						"text": "Come straight through, please.",
 						"action": {
 							"type": "go",
 							"value": "in"
@@ -139,6 +169,7 @@
 					},
 					{
 						"text": "Goodbye."
+					}
 				]
 			}
 		]
