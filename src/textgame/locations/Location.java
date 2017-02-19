@@ -111,6 +111,7 @@ public class Location {
 	}
 
 	public Item getItem(String itemName) {
+		if (this.items == null) { return null; }
 		for (Item item : this.items) {
 			if (item.getName().equals(itemName)) {
 				return item;
