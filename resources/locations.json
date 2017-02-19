@@ -2,71 +2,28 @@
 	"apartment": {
 		"id": "apartment",
 		"name": "Apartment",
-		"description": "You wake up in a sunny apartment, head splitting.",
+		"description": "You're in a bright, sunny apartment. Records and books are strewn all around the room. There's some paper sitting on a table by the window.",
 		"exits": [
 			{
 				"direction": "out",
-				"to": "street"
+				"toId": "street"
 			}
 		],
 		"items": [
 			{
-				"id": "badger",
-				"name": "Badger",
-				"description": "It's just a blue badger"
-			}
-		],
-		"npcs": [
+				"id": "paper",
+				"name": "Scraps of paper",
+				"description": "Amongst old letters and newspaper clippings you see a hand-scrawled note. It says 'Meet me at the Foundation at midnight tonight'. What could it mean?"
+			},
 			{
-				"id": "bouncer",
-				"name": "The Bouncer",
-				"conversation": [
-					{
-						"text": "No, you can't get into the club. You need to have the badge!",
-						"responses": [
-							{
-								"nextIndex": 1,
-								"message": "I have the badge!"
-							},
-							{
-								"nextIndex": 2,
-								"message": "I don't have a badge"
-							},
-							{
-								"nextIndex": 3,
-								"message": "I'm leaving"
-							}
-						]
-					},
-					{
-						"text": "Come on in then!",
-						"action": {
-							"type": "go",
-							"value": "in"
-						}
-					},
-					{
-						"text": "Well get out then",
-						"action": {
-							"type": "go",
-							"value": "out"
-						}
-					},
-					{
-						"text": "Goodbye",
-						"action": {
-							"type": "go",
-							"value": "out"
-						}
-					}
-				],
-				"items": [
-					{
-						"id": "chocolate",
-						"name": "Chocolate",
-						"description": "It's just a bar of chocolate"
-					}
-				]
+				"id": "books",
+				"name": "Books",
+				"description": "The books look old and dog-eared. They seem to be in German."	
+			},
+			{
+				"id": "records",
+				"name": "Records",
+				"description": "There are hundreds of records. None of the artists are familiar to you."
 			}
 		]
 	},
@@ -77,7 +34,7 @@
 		"exits": [
 			{
 				"direction": "in",
-				"to": "apartment"
+				"toId": "apartment"
 			}
 		],
 		"npcs": [
@@ -113,7 +70,7 @@
 						"text": "Well get out then",
 						"action": {
 							"type": "go",
-							"value": "club"
+							"value": "out"
 						}
 					},
 					{
@@ -133,5 +90,62 @@
 				]
 			}
 		]
+	},
+	"club_entrance": {
+		"id": "club_entrance",
+		"name": "Foundation club entrance",
+		"description": "You're outside the Foundation club. You can hear the thud of the music inside. The bouncer glowers at you.",
+		"exits": [
+			{
+				"direction": "back",
+				"toId": "street"
+			},
+			{
+				"direction": "in",
+				"toId": "club"
+			}
+		],
+		"npcs": [
+			{
+				"id": "bouncer",
+				"name": "The Bouncer",
+				"conversation": [
+					{
+						"text": "It's a private party tonight. No entry without a ticket.",
+						"responses": [
+							{
+								"nextIndex": 1,
+								"message": "Where can I get a ticket from?"
+							},
+							{
+								"nextIndex": 2,
+								"message": "Here's my ticket."
+							},
+							{
+								"nextIndex": 3,
+								"message": "OK, thank you."
+							}
+						]
+					},
+					{
+						"text": "Private party. Can't help."
+					},
+					{
+						"text": "Come straight through, please",
+						"action": {
+							"type": "go",
+							"value": "in"
+						}
+					},
+					{
+						"text": "Goodbye."
+				]
+			}
+		]
+	},
+	"club": {
+		"id": "club",
+		"name": "Foundation club",
+		"description": "You made it into the club! You win!"
 	}
 }
