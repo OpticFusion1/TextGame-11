@@ -11,9 +11,10 @@ import textgame.locations.Location;
 
 public class Action {
 	
-	public enum ActionType { NONE, GO, SHOW, TAKE, PICK, INSPECT, TALK }
+	public enum ActionType { NONE, GO, SHOW, TAKE, PICK, INSPECT, TALK, RECEIVE }
 	private String value;
 	private String type;
+	private String from;
     private static Map<String, ActionType> ACTION_MAP = new HashMap<String, ActionType>();
 
     static {
@@ -24,16 +25,26 @@ public class Action {
         ACTION_MAP.put("pick", ActionType.PICK);
         ACTION_MAP.put("inspect", ActionType.INSPECT);
         ACTION_MAP.put("talk",  ActionType.TALK);
+        ACTION_MAP.put("receive",  ActionType.RECEIVE);
     }
     
     public Action() {
     }
 	
+	public Action(String type, String value, String from) throws IllegalArgumentException {
+		if(ACTION_MAP.get(type) == null) { throw new IllegalArgumentException(type); }
+		this.type = type;
+		this.value = value;
+		this.from = from;
+	}
+	
 	public Action(String type, String value) throws IllegalArgumentException {
 		if(ACTION_MAP.get(type) == null) { throw new IllegalArgumentException(type); }
 		this.type = type;
 		this.value = value;
+		this.from = null;
 	}
+
 
 	public ActionType getType() {
 		return ACTION_MAP.get(type);
@@ -51,6 +62,14 @@ public class Action {
 		this.value = value;
 	}
 	
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
 	@Override
 	public String toString() {
 		return "type: " + type + ", value: " + value;

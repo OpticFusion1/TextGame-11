@@ -43,6 +43,7 @@ public class Player extends Entity {
 		/* TODO - create subtypes of actions rather than massive switch */
 		Location currentLocation = getLocation();
 		Item item = null;
+		NPC person = null;
 		
 		switch(action.getType()) {
 		case SHOW:
@@ -70,7 +71,7 @@ public class Player extends Entity {
 			}
 			break;
 		case TALK:
-			NPC person = currentLocation.getNPC(action.getValue());
+			person = currentLocation.getNPC(action.getValue());
 			if(person == null) {
 				Outputter.writeln("Did not understand: " + action.getValue());
 				return;
@@ -87,6 +88,13 @@ public class Player extends Entity {
 			addItem(item);
 			currentLocation.removeItem(item);
 			Outputter.writeln("You picked up: "+item.getName());
+			break;
+		case RECEIVE:
+			person = currentLocation.getNPC(action.getFrom());
+			item = person.getItem(action.getValue());
+			addItem(item);
+			person.removeItem(item);
+			Outputter.writeln(person.toString() + " gave you " + item.toString());
 			break;
 		case INSPECT:
 			item = currentLocation.getItemById(action.getValue());
