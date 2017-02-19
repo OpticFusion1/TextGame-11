@@ -43,6 +43,20 @@ public class Game {
 	public void setLocations(Map<String, Location> locations) {
 		this.locations = locations;
 	}
+	
+	public void connectExits() throws IllegalStateException {
+		for(Location location : getLocations().values()) {
+			if(location.getExits() == null) { continue; }
+			for(Exit exit : location.getExits()) {
+				String locationId = exit.getToId();
+				Location locationToAdd = getLocations().get(locationId);
+				if(locationToAdd == null) {
+					throw new IllegalStateException();
+				}
+				exit.setTo(getLocations().get(locationId));
+			}
+		}
+	}
 
 	public void play() {
 		player.getLocation().show();
@@ -51,7 +65,7 @@ public class Game {
 			String command = commandParser.getCommand();
 			Action action = commandParser.parse(command);
 			if(action != null) {
-				player.perform(action);
+				player.perform(action); // TODO how to handle winning?
 			}
 		}
 		Outputter.writeln("Exiting game");
