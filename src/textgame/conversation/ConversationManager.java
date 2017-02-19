@@ -50,8 +50,10 @@ public class ConversationManager {
 	}
 	
 	public void showCurrentLineResponses() {
+		int counter = 1;
 		for(Response response : getCurrentLineResponses()) {
-			Outputter.writeln(response.toString());
+			Outputter.writeln(counter + ": " + response.toString());
+			counter++;
 		}
 	}
 	

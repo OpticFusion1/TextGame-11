@@ -38,7 +38,7 @@ public class Response {
 	}
 
 	public String toString() {
-		return nextIndex + ": " + message;
+		return message;
 	}
 	
 }

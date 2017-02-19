@@ -28,8 +28,4 @@ public class NPC extends Entity {
 	public void setConversation(List<Line> convo) {
 		this.conversation = convo;
 	}
-	
-	public String toString() {
-		return this.getId();
-	}
 }
